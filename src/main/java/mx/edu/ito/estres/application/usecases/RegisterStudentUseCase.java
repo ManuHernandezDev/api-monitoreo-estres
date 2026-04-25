@@ -1,10 +1,10 @@
-package mx.edu.ito.estres.application.useCase;
+package mx.edu.ito.estres.application.usecases;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import mx.edu.ito.estres.application.port.out.StudentRepositoryPort;
+import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.domain.model.Student;
 
 @Service

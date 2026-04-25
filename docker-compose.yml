@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db-estres:
+    image: postgres:15-alpine
+    container_name: postgres-dev-limpio
+    environment:
+      POSTGRES_USER: admin_ito
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: monitoreo_estres_db
+    ports:
+      - "5435:5432" # El puerto exterior ahora es 5435
+    volumes:
+      - data_estres_nueva:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  data_estres_nueva:

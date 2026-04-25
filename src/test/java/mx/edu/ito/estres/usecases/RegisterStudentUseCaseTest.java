@@ -15,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import mx.edu.ito.estres.application.RegisterStudentUseCase;
-import mx.edu.ito.estres.application.port.out.StudentRepositoryPort;
+import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
+import mx.edu.ito.estres.application.usecases.RegisterStudentUseCase;
 import mx.edu.ito.estres.domain.model.Student;
 
 @ExtendWith(MockitoExtension.class)

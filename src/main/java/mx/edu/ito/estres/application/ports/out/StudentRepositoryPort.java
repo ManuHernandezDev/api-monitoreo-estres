@@ -1,4 +1,4 @@
-package mx.edu.ito.estres.application.port.out;
+package mx.edu.ito.estres.application.ports.out;
 
 import java.util.Optional;
 

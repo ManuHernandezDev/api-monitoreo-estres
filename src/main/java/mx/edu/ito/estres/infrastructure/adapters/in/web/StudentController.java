@@ -1,12 +1,12 @@
-package mx.edu.ito.estres.infraestructure.controller;
+package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import mx.edu.ito.estres.application.RegisterStudentUseCase;
-import mx.edu.ito.estres.application.dto.StudentRequestDTO;
+import mx.edu.ito.estres.application.usecases.RegisterStudentUseCase;
 import mx.edu.ito.estres.domain.model.Student;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.StudentRequestDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
