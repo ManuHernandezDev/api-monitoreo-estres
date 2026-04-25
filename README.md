@@ -22,8 +22,8 @@ Este backend forma la base de un sistema orientado al monitoreo del estrés acad
 ### 1. Clonar repositorio
 
 ```bash
-git clone <url-del-repositorio>
-cd <nombre-del-proyecto>
+git clone https://github.com/ManuHernandezDev/api-monitoreo-estres.git
+cd api-monitoreo-estres.git
 ```
 
 ### 2. Levantar base de datos
@@ -33,6 +33,14 @@ docker-compose up -d
 ```
 
 ### 3. Configuración
+
+El proyecto utiliza variables de entorno para las credenciales de la base de datos.
+Asegúrate de definir las siguientes variables antes de ejecutar la aplicación:
+
+```
+DB_USER
+DB_PASSWORD
+```
 
 Archivo:
 
@@ -44,8 +52,8 @@ Configuración:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5435/monitoreo_estres_db
-spring.datasource.username=admin_ito
-spring.datasource.password=root
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
