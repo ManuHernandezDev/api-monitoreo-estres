@@ -1,39 +1,63 @@
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-       e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
 
-       const requestData = {
-           email: document.getElementById('email').value,
-           password: document.getElementById('password').value,
-           semester: parseInt(document.getElementById('semester').value),
-           origin: document.getElementById('origin').value,
-           sleepHours: parseInt(document.getElementById('sleepHours').value)
-       };
+    const form = document.getElementById("studentForm");
+    const messageDiv = document.getElementById("message");
 
-       // Reemplaza la URL por la ruta exacta de tu StudentController
-       fetch('/api/v1/students/register', {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-           },
-           body: JSON.stringify(requestData)
-       })
-       .then(response => {
-           if (!response.ok) {
-               throw new Error('Error al registrar estudiante en ATENEA');
-           }
-           return response.json();
-       })
-       .then(data => {
-           const alertBox = document.getElementById('alertMessage');
-           alertBox.innerHTML = `<div class="alert alert-success">Perfil creado. Preparando entorno...</div>`;
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-           setTimeout(() => {
-               window.location.href = '/login.html';
-           }, 2000);
-       })
-       .catch(error => {
-           const alertBox = document.getElementById('alertMessage');
-           alertBox.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
-           console.error('Error:', error);
-       });
-   });
+        const semester = parseInt(document.getElementById("semester").value);
+        const sleepHours = parseInt(document.getElementById("sleepHours").value);
+
+        // 🔥 Validaciones frontend
+        if (semester < 1 || semester > 4) {
+            showError("El semestre debe estar entre 1 y 4");
+            return;
+        }
+
+        if (sleepHours < 0 || sleepHours > 20) {
+            showError("Horas de sueño inválidas (0 - 20)");
+            return;
+        }
+
+        const data = {
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            semester: semester,
+            origin: document.getElementById("origin").value,
+            sleepHours: sleepHours,
+            privacyAccepted: document.getElementById("privacy").checked
+        };
+
+        try {
+            const response = await fetch("/api/v1/students/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const text = await response.text();
+
+            if (response.ok) {
+                showSuccess(text);
+                form.reset();
+            } else {
+                showError(text);
+            }
+
+        } catch (error) {
+            showError("Error al conectar con el servidor");
+        }
+    });
+
+    function showSuccess(msg) {
+        messageDiv.innerHTML = `<div class="alert alert-success">${msg}</div>`;
+    }
+
+    function showError(msg) {
+        messageDiv.innerHTML = `<div class="alert alert-danger">${msg}</div>`;
+    }
+
+});

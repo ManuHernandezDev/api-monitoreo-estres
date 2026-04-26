@@ -32,4 +32,7 @@ public class StudentJpaEntity {
 
     @Column(name = "sleep_hours", nullable = false)
     private Integer sleepHours;
+
+    @Column(name = "privacy_accepted", nullable = false)
+    private Boolean privacyAccepted;
 }

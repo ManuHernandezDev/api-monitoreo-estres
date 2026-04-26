@@ -11,7 +11,8 @@ public class StudentMapper {
                 dto.password(),
                 dto.semester(),
                 dto.origin(),
-                dto.sleepHours()
+                dto.sleepHours(),
+                dto.privacyAccepted()
         );
     }
 }
