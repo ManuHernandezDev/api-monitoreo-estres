@@ -1,5 +1,6 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
+import mx.edu.ito.estres.infrastructure.adapters.in.web.mapper.StudentMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,16 +23,8 @@ public class StudentController {
     @PostMapping("/register")
     public ResponseEntity<String> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
 
-        Student student = new Student(
-                null,
-                studentRequestDTO.email(),
-                studentRequestDTO.password(),
-                studentRequestDTO.semester(),
-                studentRequestDTO.origin(),
-                studentRequestDTO.sleepHours());
-
+        Student student = StudentMapper.toDomain(studentRequestDTO);
         registerStudentUseCase.register(student);
-
         return ResponseEntity.status(HttpStatus.CREATED).body("Student registered successfully");
     }
 

@@ -83,8 +83,9 @@ spring.profiles.active=dev
   "email": "example@itoaxaca.edu.mx",
   "password": "hashed_password",
   "semester": 1,
-  "origin": "Oaxaca",
-  "sleepHours": 7
+  "origin": "Local",
+  "sleepHours": 7,
+  "privacyAccepted": true
 }
 ```
 
@@ -92,14 +93,21 @@ spring.profiles.active=dev
 
 ```json
 {
-  "message": "Estudiante registrado exitosamente"
+  "message": "Student registered successfully"
 }
 ```
-
 ---
-
+## Validaciones implementadas
+* El correo debe ser institucional (@itoaxaca.edu.mx)
+* El semestre debe estar entre 1 y 4
+* Las horas de sueño deben estar entre 0 y 20
+* No se permiten valores negativos
+* El usuario debe aceptar el aviso de privacidad
+---
 ## Estado del proyecto
-
 * Registro de estudiantes implementado
-* Conexión a base de datos funcional
-* Arquitectura base definida
+* Validaciones de dominio completas
+* Integración con base de datos funcional
+* Arquitectura hexagonal implementada
+* Pruebas unitarias con Mockito
+* Pruebas de integración con Spring Boot

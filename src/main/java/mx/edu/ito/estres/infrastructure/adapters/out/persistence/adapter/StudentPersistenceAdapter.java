@@ -41,7 +41,7 @@ public class StudentPersistenceAdapter implements StudentRepositoryPort {
     private Student toDomain(StudentJpaEntity entity) {
         return new Student(
                 entity.getId(), entity.getEmail(), entity.getPassword(),
-                entity.getSemester(), entity.getOrigin(), entity.getSleepHours()
+                entity.getSemester(), entity.getOrigin(), entity.getSleepHours(), entity.getPrivacyAccepted()
         );
     }
 
@@ -53,6 +53,7 @@ public class StudentPersistenceAdapter implements StudentRepositoryPort {
                 .semester(student.semester())
                 .origin(student.origin())
                 .sleepHours(student.sleepHours())
+                .privacyAccepted(student.privacyAccepted())
                 .build();
     }
 }

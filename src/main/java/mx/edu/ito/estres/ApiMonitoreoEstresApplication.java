@@ -8,5 +8,4 @@ public class ApiMonitoreoEstresApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiMonitoreoEstresApplication.class, args);
 	}
-
 }

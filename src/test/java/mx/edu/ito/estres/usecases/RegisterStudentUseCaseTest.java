@@ -30,13 +30,13 @@ public class RegisterStudentUseCaseTest {
     @Test
     void shoueldRegisterStudentSuccessfully() {
         // Given: An Student Valid that dont exist in database
-        Student newStudent = new Student(null, "manu@itoaxaca.edu.mx", "rawPassword123", 4, "Local", 6);
+        Student newStudent = new Student(null, "manu@itoaxaca.edu.mx", "rawPassword123", 4, "Local", 6, true);
 
         // Simulated The port of database dont find the email
         when(studentRepositoryPort.findByEmail("manu@itoaxaca.edu.mx")).thenReturn(Optional.empty());
 
         // Simulated that saved, the database set ID 1
-        Student savedStudent = new Student(1L, "manu@itoaxaca.edu.mx", "hashedPassword", 4, "Local", 6);
+        Student savedStudent = new Student(1L, "manu@itoaxaca.edu.mx", "hashedPassword", 4, "Local", 6, true);
         when(studentRepositoryPort.save(any(Student.class))).thenReturn(savedStudent);
 
         // When Execute the use case
@@ -50,5 +50,19 @@ public class RegisterStudentUseCaseTest {
         assertEquals("manu@itoaxaca.edu.mx", result.email(), "El email debe coincidir");
         assertNotNull(result.password(), "El password no debe estar vacio");
 
+    }
+    @Test
+    void shouldThrowExceptionWhenEmailAlreadyExists() {
+        Student student = new Student(null, "manu@itoaxaca.edu.mx", "123", 2, "Local", 6, true);
+
+        when(studentRepositoryPort.findByEmail(student.email()))
+                .thenReturn(Optional.of(student));
+
+        RuntimeException exception = org.junit.jupiter.api.Assertions.assertThrows(
+                RuntimeException.class,
+                () -> registerStudentUseCase.register(student)
+        );
+
+        assertEquals("Email already registered", exception.getMessage());
     }
 }
