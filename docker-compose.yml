@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: monitoreo_estres_db
     ports:
-      - "5435:5432" # El puerto exterior ahora es 5435
+      - "5435:5432"
     volumes:
       - data_estres_nueva:/var/lib/postgresql/data
     restart: unless-stopped
