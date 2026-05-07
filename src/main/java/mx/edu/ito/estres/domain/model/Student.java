@@ -7,7 +7,9 @@ public record Student(
         Integer semester,
         String origin,
         Integer sleepHours,
-        Boolean privacyAccepted) {
+        Boolean privacyAccepted,
+        Role role)
+{
 
     public Student {
         if (email == null || !email.endsWith("@itoaxaca.edu.mx")) {

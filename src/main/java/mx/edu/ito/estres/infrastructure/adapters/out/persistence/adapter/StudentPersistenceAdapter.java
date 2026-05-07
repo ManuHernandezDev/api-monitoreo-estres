@@ -9,39 +9,38 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component // Le decimos a Spring que este es un empleado disponible
+@Component
 @RequiredArgsConstructor
 public class StudentPersistenceAdapter implements StudentRepositoryPort {
 
-    private final StudentSpringRepository springRepository;
+    private final StudentSpringRepository studentSpringRepository;
 
     @Override
     public Optional<Student> findByEmail(String email) {
-        // 1. Busca en la base de datos
-        Optional<StudentJpaEntity> entityOptional = springRepository.findByEmail(email);
-
-        // 2. Si lo encuentra, lo traduce de JpaEntity a Domain Student
+        Optional<StudentJpaEntity> entityOptional = studentSpringRepository.findByEmail(email);
         return entityOptional.map(this::toDomain);
     }
 
     @Override
-    public Student save(Student student) {
-        // 1. Traduce de Domain Student a JpaEntity
-        StudentJpaEntity entityToSave = toEntity(student);
+    public Student save(Student studentDomain) {
+        StudentJpaEntity jpaEntity = new StudentJpaEntity();
+        jpaEntity.setEmail(studentDomain.email());
+        jpaEntity.setPassword(studentDomain.password());
+        jpaEntity.setOrigin(studentDomain.origin());
+        jpaEntity.setPrivacyAccepted(studentDomain.privacyAccepted());
+        jpaEntity.setSemester(studentDomain.semester());
+        jpaEntity.setSleepHours(studentDomain.sleepHours());
+        jpaEntity.setRole(studentDomain.role());
 
-        // 2. Lo guarda en PostgreSQL
-        StudentJpaEntity savedEntity = springRepository.save(entityToSave);
-
-        // 3. Lo regresa traducido al dominio para que el Chef lo entienda
+        StudentJpaEntity savedEntity = studentSpringRepository.save(jpaEntity);
         return toDomain(savedEntity);
     }
 
-    // --- Métodos Mappers (Traductores) ---
-    // En producción usamos MapStruct, pero a mano se ve más claro cómo funciona
     private Student toDomain(StudentJpaEntity entity) {
         return new Student(
                 entity.getId(), entity.getEmail(), entity.getPassword(),
-                entity.getSemester(), entity.getOrigin(), entity.getSleepHours(), entity.getPrivacyAccepted()
+                entity.getSemester(), entity.getOrigin(), entity.getSleepHours(), entity.getPrivacyAccepted(),
+                entity.getRole()
         );
     }
 

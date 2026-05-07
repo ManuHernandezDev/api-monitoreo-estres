@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCaseConfig {
     @Bean
-    public RegisterStudentUseCase registerStudentUseCase(StudentRepositoryPort repo) {
-        return new RegisterStudentUseCase(repo);
+    public RegisterStudentUseCase registerStudentUseCase(StudentRepositoryPort repo, PasswordEncoderConfig passwordEncoderConfig) {
+        return new RegisterStudentUseCase(repo, passwordEncoderConfig);
     }
 }

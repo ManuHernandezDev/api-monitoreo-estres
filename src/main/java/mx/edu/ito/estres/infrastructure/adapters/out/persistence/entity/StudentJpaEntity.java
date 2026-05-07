@@ -1,14 +1,13 @@
 package mx.edu.ito.estres.infrastructure.adapters.out.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import mx.edu.ito.estres.domain.model.Role;
 
 @Entity
 @Table(name = "students")
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,4 +34,8 @@ public class StudentJpaEntity {
 
     @Column(name = "privacy_accepted", nullable = false)
     private Boolean privacyAccepted;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
