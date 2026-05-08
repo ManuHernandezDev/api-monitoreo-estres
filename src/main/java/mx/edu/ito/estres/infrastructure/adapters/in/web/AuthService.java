@@ -6,8 +6,6 @@ import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.AuthRequest;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.AuthResponse;
 import mx.edu.ito.estres.infrastructure.config.CustomUserDetailsService;
 import mx.edu.ito.estres.infrastructure.config.JwtService;
-import org.apache.catalina.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +24,16 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthRequest authRequest){
+        System.out.println("Entrando a service");
         Student user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if(!passwordEncoder.matches(authRequest.getPassword(), user.email())){
+        if(!passwordEncoder.matches(authRequest.getPassword(), user.password())){
             throw new RuntimeException("Invalid credentials");
         }
 
-
-        String token = jwtService.generateToken(customUserDetailsService.loadUserByUsername(user.email()));
+        String token = jwtService.generateToken(user.email(), user.role().name());
+        System.out.println("Token Generado");
         return new AuthResponse(token);
-
     }
 }
