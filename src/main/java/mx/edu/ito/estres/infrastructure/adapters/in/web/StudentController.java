@@ -26,4 +26,5 @@ public class StudentController {
         registerStudentUseCase.register(studentRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Student registered successfully");
     }
+
 }
