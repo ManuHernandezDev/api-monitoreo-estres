@@ -1,19 +1,16 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web.mapper;
 
 import mx.edu.ito.estres.domain.model.Student;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.StudentRequestDTO;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.StudentResponseDTO;
 
 public class StudentMapper {
-    public static Student toDomain(StudentRequestDTO dto) {
-        return new Student(
+    public static StudentResponseDTO toDomain(Student student) {
+        return new StudentResponseDTO(
                 null,
-                dto.email(),
-                dto.password(),
-                dto.semester(),
-                dto.origin(),
-                dto.sleepHours(),
-                dto.privacyAccepted(),
-                dto.role()
+                student.email(),
+                student.semester(),
+                student.origin(),
+                student.sleepHours()
         );
     }
 }

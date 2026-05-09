@@ -1,6 +1,7 @@
 package mx.edu.ito.estres.infrastructure.config;
 
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,18 +13,14 @@ import mx.edu.ito.estres.domain.model.Student;
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
-
     private final StudentRepositoryPort studentRepositoryPort;
-
+    @NullMarked
     @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Student student = studentRepositoryPort
                 .findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Student not found"));
-
         return new StudentUserDetails(student);
     }
 }

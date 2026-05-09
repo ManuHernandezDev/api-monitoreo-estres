@@ -1,12 +1,10 @@
 package mx.edu.ito.estres.application.usecases;
 
-import java.util.Optional;
-
 import mx.edu.ito.estres.domain.exception.EmailAlreadyExistsException;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
-import mx.edu.ito.estres.domain.exception.InvalidStudentException;
 import mx.edu.ito.estres.domain.model.Student;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.StudentRequestDTO;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.StudentRequestDTO;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.mapper.StudentMapper;
 import mx.edu.ito.estres.infrastructure.config.PasswordEncoderConfig;
 
 public class RegisterStudentUseCase {
@@ -18,26 +16,23 @@ public class RegisterStudentUseCase {
         this.passwordEncoderConfig = passwordEncoderConfig;
     }
 
-    public Student register(StudentRequestDTO studentRequestDTO) {
-        // 1. Validaciones (Ya las hace tu constructor de Record, ¡bien!)
-
-        // 2. Verificar duplicados
+    public void register(StudentRequestDTO studentRequestDTO) {
         if (studentRepositoryPort.findByEmail(studentRequestDTO.email()).isPresent()) {
             throw new EmailAlreadyExistsException();
         }
         String encodedPassword = passwordEncoderConfig.passwordEncoder().encode(studentRequestDTO.password());
 
         Student studentToSave = new Student(
-                null, // El ID va null porque lo genera la DB
+                null,
                 studentRequestDTO.email(),
-                encodedPassword, // Guardamos la encriptada
+                encodedPassword,
                 studentRequestDTO.semester(),
                 studentRequestDTO.origin(),
                 studentRequestDTO.sleepHours(),
                 studentRequestDTO.privacyAccepted(),
-                studentRequestDTO.role() // <--- ASEGÚRATE DE PASAR EL ROL AQUÍ
+                studentRequestDTO.role()
         );
-
-        return studentRepositoryPort.save(studentToSave);
+        Student studentSaved = studentRepositoryPort.save(studentToSave);
+        StudentMapper.toDomain(studentSaved);
     }
 }

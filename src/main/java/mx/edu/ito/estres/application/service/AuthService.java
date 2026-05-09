@@ -1,9 +1,9 @@
-package mx.edu.ito.estres.infrastructure.adapters.in.web;
+package mx.edu.ito.estres.application.service;
 
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.domain.model.Student;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.AuthRequest;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.AuthResponse;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.AuthRequest;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.AuthResponse;
 import mx.edu.ito.estres.infrastructure.config.CustomUserDetailsService;
 import mx.edu.ito.estres.infrastructure.config.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,13 +14,11 @@ public class AuthService {
     private final StudentRepositoryPort userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final CustomUserDetailsService customUserDetailsService;
 
     public AuthService(StudentRepositoryPort userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, CustomUserDetailsService customUserDetailsService){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.customUserDetailsService = customUserDetailsService;
     }
 
     public AuthResponse login(AuthRequest authRequest){
