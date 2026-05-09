@@ -5,6 +5,7 @@ import mx.edu.ito.estres.domain.model.Student;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.AuthRequest;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.AuthResponse;
 import mx.edu.ito.estres.infrastructure.config.CustomUserDetailsService;
+import mx.edu.ito.estres.infrastructure.config.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
