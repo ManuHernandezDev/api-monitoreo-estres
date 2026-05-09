@@ -25,8 +25,6 @@ public class RegisterStudentUseCase {
         if (studentRepositoryPort.findByEmail(studentRequestDTO.email()).isPresent()) {
             throw new EmailAlreadyExistsException();
         }
-
-        // 3. Encriptar password y crear NUEVO objeto (porque el record es inmutable)
         String encodedPassword = passwordEncoderConfig.passwordEncoder().encode(studentRequestDTO.password());
 
         Student studentToSave = new Student(
