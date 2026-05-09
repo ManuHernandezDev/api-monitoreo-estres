@@ -1,7 +1,7 @@
-package mx.edu.ito.estres.infrastructure.config;
+package mx.edu.ito.estres.application.usecases;
 
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
-import mx.edu.ito.estres.application.usecases.RegisterStudentUseCase;
+import mx.edu.ito.estres.infrastructure.config.PasswordEncoderConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
