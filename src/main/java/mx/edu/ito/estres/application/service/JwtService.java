@@ -1,4 +1,4 @@
-package mx.edu.ito.estres.infrastructure.config;
+package mx.edu.ito.estres.application.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
