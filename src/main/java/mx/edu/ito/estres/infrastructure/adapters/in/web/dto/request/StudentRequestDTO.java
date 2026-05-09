@@ -1,4 +1,4 @@
-package mx.edu.ito.estres.infrastructure.adapters.in.web.dto;
+package mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request;
 
 import mx.edu.ito.estres.domain.model.Role;
 
@@ -9,4 +9,5 @@ public record StudentRequestDTO(
         String origin,
         int sleepHours,
         boolean privacyAccepted,
-        Role role) {}
+        Role role) {
+}
