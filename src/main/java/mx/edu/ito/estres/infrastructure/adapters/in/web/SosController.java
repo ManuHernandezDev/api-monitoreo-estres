@@ -1,10 +1,10 @@
-package mx.edu.ito.estres.infrastructure.adapters.in;
+package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.service.AlertService;
 import mx.edu.ito.estres.application.usecases.RegisterEmergencyContactUseCase;
 import mx.edu.ito.estres.domain.model.Student;
-import mx.edu.ito.estres.infrastructure.dto.sos.EmergencyContactRequest;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.sos.EmergencyContactRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
