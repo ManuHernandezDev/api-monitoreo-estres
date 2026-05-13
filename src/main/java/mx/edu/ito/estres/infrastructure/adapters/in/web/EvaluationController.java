@@ -3,6 +3,7 @@ package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.usecases.SubmitEvaluationUseCase;
+import mx.edu.ito.estres.domain.exception.StudentNotFoundException;
 import mx.edu.ito.estres.domain.model.Student;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.EvaluationRequest;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.EvaluationResponse;
@@ -33,8 +34,7 @@ public class EvaluationController {
 
         Student student = studentRepositoryPort
                 .findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("Student not found"));
+                .orElseThrow(StudentNotFoundException::new);
 
         return submitEvaluationUseCase.submit(
                 student.id(),
