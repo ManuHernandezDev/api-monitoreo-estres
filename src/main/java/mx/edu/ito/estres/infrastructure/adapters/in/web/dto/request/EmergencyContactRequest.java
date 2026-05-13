@@ -7,12 +7,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AuthRequest {
+public class EmergencyContactRequest {
 
-    @Email(message = "Invalid email format")
+    @NotBlank(message = "Name is required")
+    private String name;
+
+    @NotBlank(message = "Phone is required")
+    private String phone;
+
+    @Email(message = "Invalid email")
     @NotBlank(message = "Email is required")
     private String email;
-
-    @NotBlank(message = "Password is required")
-    private String password;
 }

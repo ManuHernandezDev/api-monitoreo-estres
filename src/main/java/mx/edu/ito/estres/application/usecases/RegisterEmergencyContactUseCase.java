@@ -2,7 +2,7 @@ package mx.edu.ito.estres.application.usecases;
 
 import mx.edu.ito.estres.application.ports.out.EmergencyContactRepositoryPort;
 import mx.edu.ito.estres.domain.model.EmergencyContact;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.sos.EmergencyContactRequest;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.EmergencyContactRequest;
 import org.springframework.stereotype.Service;
 
 @Service

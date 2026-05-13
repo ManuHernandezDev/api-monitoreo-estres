@@ -1,11 +1,12 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
+import jakarta.validation.Valid;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.service.AlertService;
 import mx.edu.ito.estres.application.usecases.RegisterEmergencyContactUseCase;
 import mx.edu.ito.estres.domain.exception.StudentNotFoundException;
 import mx.edu.ito.estres.domain.model.Student;
-import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.sos.EmergencyContactRequest;
+import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.EmergencyContactRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class SosController {
 
     @PostMapping("/contacts")
     public String registerContact(
-            @RequestBody EmergencyContactRequest request,
+            @Valid @RequestBody EmergencyContactRequest request,
             Authentication authentication) {
 
         String email = authentication.getName();

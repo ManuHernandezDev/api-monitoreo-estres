@@ -1,5 +1,6 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class StudentController {
     private final RegisterStudentUseCase registerStudentUseCase;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
+    public ResponseEntity<String> registerStudent(@Valid @RequestBody StudentRequestDTO studentRequestDTO) {
         registerStudentUseCase.register(studentRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Student registered successfully");
     }

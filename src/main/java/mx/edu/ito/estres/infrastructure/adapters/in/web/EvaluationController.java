@@ -1,6 +1,7 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
 
+import jakarta.validation.Valid;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.usecases.SubmitEvaluationUseCase;
 import mx.edu.ito.estres.domain.exception.StudentNotFoundException;
@@ -26,7 +27,7 @@ public class EvaluationController {
 
     @PostMapping
     public EvaluationResponse submit(
-            @RequestBody EvaluationRequest request,
+            @Valid @RequestBody EvaluationRequest request,
             Authentication authentication
     ) {
 
