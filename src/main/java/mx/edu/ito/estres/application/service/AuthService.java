@@ -1,6 +1,7 @@
 package mx.edu.ito.estres.application.service;
 
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
+import mx.edu.ito.estres.domain.exception.InvalidCredentialsException;
 import mx.edu.ito.estres.domain.model.Student;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.AuthRequest;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.AuthResponse;
@@ -27,7 +28,7 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if(!passwordEncoder.matches(authRequest.getPassword(), user.password())){
-            throw new RuntimeException("Invalid credentials");
+            throw new InvalidCredentialsException();
         }
 
         String token = jwtService.generateToken(user.email(), user.role().name());

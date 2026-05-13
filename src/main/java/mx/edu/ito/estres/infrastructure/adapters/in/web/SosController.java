@@ -3,6 +3,7 @@ package mx.edu.ito.estres.infrastructure.adapters.in.web;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.service.AlertService;
 import mx.edu.ito.estres.application.usecases.RegisterEmergencyContactUseCase;
+import mx.edu.ito.estres.domain.exception.StudentNotFoundException;
 import mx.edu.ito.estres.domain.model.Student;
 import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.sos.EmergencyContactRequest;
 import org.springframework.security.core.Authentication;
@@ -34,7 +35,7 @@ public class SosController {
 
         Student student = studentRepositoryPort
                 .findByEmail(email)
-                .orElseThrow();
+                .orElseThrow(StudentNotFoundException::new);
 
         registerUseCase.register(
                 student.id(),
@@ -50,7 +51,7 @@ public class SosController {
 
         Student student = studentRepositoryPort
                 .findByEmail(email)
-                .orElseThrow();
+                .orElseThrow(StudentNotFoundException::new);
 
         alertService.sendEmergencyAlert(student.id());
 
