@@ -2,6 +2,7 @@ package mx.edu.ito.estres.infrastructure.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -9,9 +10,10 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    private final String SECRET ="mysecretkeymysecretkeymysecretkey";
+    @Value("${security.jwt.secret-key}")
+    private String secret;
     private SecretKey getKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
     public String generateToken(String email, String role) {
         return Jwts.builder()
