@@ -1,5 +1,6 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.service.AlertService;
@@ -10,6 +11,7 @@ import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.request.EmergencyCon
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "SOS")
 @RestController
 @RequestMapping("/sos")
 public class SosController {

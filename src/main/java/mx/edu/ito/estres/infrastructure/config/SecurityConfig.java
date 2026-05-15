@@ -30,8 +30,13 @@ public class SecurityConfig {
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers("/auth/**").permitAll()
-                                                .requestMatchers("/api/v1/students/**").permitAll()
-                                                .requestMatchers("/sos/**").permitAll()
+                                                .requestMatchers(
+                                                        "/v3/api-docs/**",
+                                                        "/swagger-ui/**",
+                                                        "/swagger-ui.html"
+                                                ).permitAll()
+//                                                .requestMatchers("/api/v1/students/**").permitAll()
+//                                                .requestMatchers("/sos/**").permitAll()
                                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                                 .anyRequest().authenticated())
                                 .addFilterBefore(

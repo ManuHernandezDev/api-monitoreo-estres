@@ -1,11 +1,13 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import mx.edu.ito.estres.application.service.ExportService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Admin")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

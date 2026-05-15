@@ -1,6 +1,7 @@
 package mx.edu.ito.estres.infrastructure.adapters.in.web;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import mx.edu.ito.estres.application.ports.out.StudentRepositoryPort;
 import mx.edu.ito.estres.application.usecases.SubmitEvaluationUseCase;
@@ -11,6 +12,7 @@ import mx.edu.ito.estres.infrastructure.adapters.in.web.dto.response.EvaluationR
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Evaluation")
 @RestController
 @RequestMapping("/evaluation")
 public class EvaluationController {
