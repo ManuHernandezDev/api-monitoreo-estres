@@ -1,17 +1,35 @@
-version: '3.8'
 services:
   db-estres:
     image: postgres:15-alpine
     container_name: postgres-dev-limpio
     environment:
-      POSTGRES_USER: admin_ito
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: monitoreo_estres_db
     ports:
       - "5435:5432"
     volumes:
       - data_estres_nueva:/var/lib/postgresql/data
     restart: unless-stopped
+
+  backend:
+    build: .
+    container_name: stress-backend
+    depends_on:
+      - db-estres
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+      JWT_SECRET: ${JWT_SECRET}
 
 volumes:
   data_estres_nueva:
