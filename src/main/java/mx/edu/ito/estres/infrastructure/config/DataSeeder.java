@@ -31,7 +31,7 @@ public class DataSeeder implements CommandLineRunner {
     private void createAdmin() {
 
         String adminEmail =
-                "admin@stressmonitor.com";
+                "admin@itoaxaca.edu.mx";
 
         if(studentRepositoryPort
                 .findByEmail(adminEmail)
@@ -41,9 +41,9 @@ public class DataSeeder implements CommandLineRunner {
                     null,
                     adminEmail,
                     passwordEncoder.encode("admin123"),
-                    0,
-                    "SYSTEM",
-                    0,
+                    2,
+                    "LOCAL",
+                    7,
                     true,
                     Role.ADMIN
             );
@@ -65,7 +65,7 @@ password: admin123
     private void createDemoStudent() {
 
         String studentEmail =
-                "student@test.com";
+                "student@itoaxaca.edu.mx";
 
         if(studentRepositoryPort
                 .findByEmail(studentEmail)
